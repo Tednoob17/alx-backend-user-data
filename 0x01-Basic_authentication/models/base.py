@@ -59,6 +59,18 @@ class Base():
 
     @classmethod
     def load_from_file(cls):
+        """ Load all objects from file
+        """
+        s_class = cls.__name__
+        file_path = ".db_{}.json".format(s_class)
+        DATA[s_class] = {}
+        if not path.exists(file_path):
+            return
+
+        with open(file_path, 'r') as f:
+            objs_json = json.load(f)
+            for obj_id, obj_json in objs_json.items():
+                DATA[s_class][obj_id] = cls(**obj_json)
 
     @classmethod
     def save_to_file(cls):
