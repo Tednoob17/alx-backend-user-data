@@ -8,10 +8,6 @@ app = Flask(__name__)
 AUTH = Auth()
 
 
-@app.route('/')
-def status():
-    """Simple route to test the app"""
-    return jsonify({"message": "Bienvenue"})
 
 
 @app.route('/users', methods=['POST'], strict_slashes=False)
