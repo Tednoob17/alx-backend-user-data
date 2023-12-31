@@ -52,7 +52,31 @@ def delete_user(user_id: str = None) -> str:
 
 
 @app_views.route('/users', methods=['POST'], strict_slashes=False)
-
+def create_user() -> str:
+    """ POST /api/v1/users/
+    JSON body:
+      - email
+      - password
+      - last_name (optional)
+      - first_name (optional)
+    Return:
+      - User object JSON represented
+      - 400 if can't create the new User
+    """
+    rj = None
+    error_msg = None
+    try:
+        rj = request.get_json()
+    except Exception as e:
+        rj = None
+    if rj is None:
+        error_msg = "Wrong format"
+    if error_msg is None and rj.get("email", "") == "":
+        error_msg = "email missing"
+    if error_msg is None and rj.get("password", "") == "":
+        error_msg = "password missing"
+    if error_msg is None:
+        try:
             user = User()
             user.email = rj.get("email")
             user.password = rj.get("password")
