@@ -25,13 +25,6 @@ class User(Base):
         return self._password
 
     @password.setter
-    def password(self, pwd: str):
-        """ Setter of a new password: encrypt in SHA256
-        """
-        if pwd is None or type(pwd) is not str:
-            self._password = None
-        else:
-            self._password = hashlib.sha256(pwd.encode()).hexdigest().lower()
 
     def is_valid_password(self, pwd: str) -> bool:
         """ Validate a password
