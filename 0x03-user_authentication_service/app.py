@@ -51,14 +51,6 @@ def logout():
 
 
 @app.route('/profile', methods=['GET'], strict_slashes=False)
-def profile():
-    """Get the profile of a user"""
-    session_id = request.cookies.get('session_id')
-    user = AUTH.get_user_from_session_id(session_id)
-    if not user:
-        abort(403)
-    return jsonify({"email": user.email}), 200
-
 
 @app.route('/reset_password', methods=['POST'], strict_slashes=False)
 def get_reset_password_token():
