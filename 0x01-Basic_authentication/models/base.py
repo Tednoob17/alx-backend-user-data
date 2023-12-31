@@ -93,14 +93,6 @@ class Base():
         DATA[s_class][self.id] = self
         self.__class__.save_to_file()
 
-    def remove(self):
-        """ Remove object
-        """
-        s_class = self.__class__.__name__
-        if DATA[s_class].get(self.id) is not None:
-            del DATA[s_class][self.id]
-            self.__class__.save_to_file()
-
     @classmethod
     def count(cls) -> int:
         """ Count all objects
