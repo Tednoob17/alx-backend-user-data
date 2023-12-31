@@ -122,16 +122,6 @@ class Base():
         return DATA[s_class].get(id)
 
     @classmethod
-    def search(cls, attributes: dict = {}) -> List[TypeVar('Base')]:
-        """ Search all objects with matching attributes
-        """
-        s_class = cls.__name__
-        def _search(obj):
-            if len(attributes) == 0:
-                return True
-            for k, v in attributes.items():
-                if (getattr(obj, k) != v):
-                    return False
-            return True
+   
         
         return list(filter(_search, DATA[s_class].values()))
