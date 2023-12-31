@@ -55,4 +55,5 @@ class User(Base):
             return "{}".format(self.first_name)
         if self.first_name is None:
             return "{}".format(self.last_name)
-
+        else:
+            return "{} {}".format(self.first_name, self.last_name)
