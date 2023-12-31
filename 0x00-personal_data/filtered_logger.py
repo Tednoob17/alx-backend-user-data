@@ -14,7 +14,8 @@ class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class """
 
     REDACTION = "***"
-  
+    FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
+    SEPARATOR = ";"
 
     def __init__(self, fields: List[str] = None):
         """ Constructor method """
@@ -35,16 +36,6 @@ def filter_datum(fields: List[str], redaction: str,
                          f'{field}={redaction}{separator}', message)
     return message
 
-
-def get_logger() -> logging.Logger:
-    """Creates a new logger for user data."""
-    logger = logging.getLogger("user_data")
-    stream = logging.StreamHandler()
-    stream.setFormatter(RedactingFormatter(PII_FIELDS))
-    logger.setLevel(logging.INFO)
-    logger.propagate = False
-    logger.addHandler(stream)
-    return logger
 
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
