@@ -28,14 +28,17 @@ class RedactingFormatter(logging.Formatter):
                             super().format(record), self.SEPARATOR)
 
 
-def filter_datum(fields: List[str], redaction: str,
-                 message: str, separator: str) -> str:
-    """Returns the log message obfuscated"""
-    for field in fields:
-        message = re.sub(f'{field}=(.*?){separator}',
-                         f'{field}={redaction}{separator}', message)
-    return message
 
+
+def get_logger() -> logging.Logger:
+    """Creates a new logger for user data."""
+    logger = logging.getLogger("user_data")
+    stream = logging.StreamHandler()
+    stream.setFormatter(RedactingFormatter(PII_FIELDS))
+    logger.setLevel(logging.INFO)
+    logger.propagate = False
+    logger.addHandler(stream)
+    return logger
 
 
 def get_db() -> mysql.connector.connection.MySQLConnection:
