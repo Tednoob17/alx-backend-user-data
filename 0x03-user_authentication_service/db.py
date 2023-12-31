@@ -35,6 +35,15 @@ class DB:
         self._session.commit()
         return new_user
 
+    def find_user_by(self, **kwargs) -> User:
+        """Find the first user"""
+        if not kwargs:
+            raise InvalidRequestError
+        user_found = self._session.query(User).filter_by(**kwargs).first()
+        if not user_found:
+            raise NoResultFound
+        return user_found
+
     def update_user(self, user_id: int, **kwargs) -> None:
         """Update the user's attributes"""
         user_found = self.find_user_by(id=user_id)
