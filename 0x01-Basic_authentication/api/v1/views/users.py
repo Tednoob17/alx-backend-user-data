@@ -77,17 +77,6 @@ def create_user() -> str:
         error_msg = "password missing"
     if error_msg is None:
         try:
-            user = User()
-            user.email = rj.get("email")
-            user.password = rj.get("password")
-            user.first_name = rj.get("first_name")
-            user.last_name = rj.get("last_name")
-            user.save()
-            return jsonify(user.to_json()), 201
-        except Exception as e:
-            error_msg = "Can't create User: {}".format(e)
-    return jsonify({'error': error_msg}), 400
-
 
 @app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)
 def update_user(user_id: str = None) -> str:
