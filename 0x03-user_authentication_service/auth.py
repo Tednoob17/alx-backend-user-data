@@ -42,15 +42,7 @@ class Auth:
         return bcrypt.checkpw(password.encode('utf-8'),
                               user_found.hashed_password)
 
-    def create_session(self, email: str):
-        """Creates a session ID"""
-        try:
-            user_found = self._db.find_user_by(email=email)
-        except NoResultFound:
-            return None
-        session_id = _generate_uuid()
-        self._db.update_user(user_found.id, session_id=session_id)
-        return session_id
+   return session_id
 
     def get_user_from_session_id(self, session_id: str) -> Union[User, None]:
         """Returns a user based on his session ID"""
