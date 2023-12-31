@@ -5,12 +5,6 @@ from auth import Auth
 import requests
 
 
-def register_user(email: str, password: str) -> None:
-    """register user"""
-    return requests.post('http://localhost:5000/users', data={
-        'email': email,
-        'password': password
-    })
 
 
 def log_in_wrong_password(email: str, password: str) -> None:
