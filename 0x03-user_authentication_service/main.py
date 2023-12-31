@@ -21,6 +21,14 @@ def log_in_wrong_password(email: str, password: str) -> None:
     })
 
 
+def log_in(email: str, password: str) -> str:
+    """log in"""
+    response = requests.post('http://localhost:5000/sessions', data={
+        'email': email,
+        'password': password
+    })
+    return response.cookies.get('session_id')
+
 
 def profile_unlogged() -> None:
     """profile unlogged"""
