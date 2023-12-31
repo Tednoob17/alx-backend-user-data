@@ -73,7 +73,17 @@ class Base():
                 DATA[s_class][obj_id] = cls(**obj_json)
 
     @classmethod
- 
+    def save_to_file(cls):
+        """ Save all objects to file
+        """
+        s_class = cls.__name__
+        file_path = ".db_{}.json".format(s_class)
+        objs_json = {}
+        for obj_id, obj in DATA[s_class].items():
+            objs_json[obj_id] = obj.to_json(True)
+
+        with open(file_path, 'w') as f:
+            json.dump(objs_json, f)
 
     def save(self):
         """ Save current object
