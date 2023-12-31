@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """ Main Module """
-from flask import Flask, jsonify, request, abort, redirect
-from auth import Auth
-import requests
+ requests
 
 
 def register_user(email: str, password: str) -> None:
