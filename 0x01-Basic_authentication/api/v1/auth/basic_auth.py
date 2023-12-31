@@ -18,19 +18,20 @@ class BasicAuth(Auth):
             return None
         return authorization_header[6:]
 
-
-    def extract_user_credentials(self,
-                                 decode_base64_authorization_header: str
-                                 ) -> (str, str):
-        """Extract User Credentials"""
-        if decode_base64_authorization_header is None or \
-           not isinstance(decode_base64_authorization_header, str):
-            return (None, None)
+    def decode_base64_authorization_header(self,
+                                           base64_authorization_header: str
+                                           ) -> str:
+        """Decode Base64"""
+        if base64_authorization_header is None or \
+           not isinstance(base64_authorization_header, str):
+            return None
         try:
-            return tuple(decode_base64_authorization_header.split(':', 1))
+            base64_bytes = base64.b64decode(base64_authorization_header)
+            return base64_bytes.decode('utf-8')
         except Exception:
-            return (None, None)
+            return None
 
+  
     def user_object_from_credentials(self,
                                      user_email: str,
                                      user_pwd: str) -> TypeVar('User'):
