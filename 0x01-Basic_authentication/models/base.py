@@ -44,7 +44,19 @@ class Base():
             return False
         return (self.id == other.id)
 
-  
+    def to_json(self, for_serialization: bool = False) -> dict:
+        """ Convert the object a JSON dictionary
+        """
+        result = {}
+        for key, value in self.__dict__.items():
+            if not for_serialization and key[0] == '_':
+                continue
+            if type(value) is datetime:
+                result[key] = value.strftime(TIMESTAMP_FORMAT)
+            else:
+                result[key] = value
+        return result
+
     @classmethod
     def load_from_file(cls):
         """ Load all objects from file
