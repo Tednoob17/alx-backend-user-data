@@ -38,6 +38,11 @@ def profile_logged(session_id: str) -> None:
     })
 
 
+def log_out(session_id: str) -> None:
+    """log out"""
+    return requests.delete('http://localhost:5000/sessions', cookies={
+        'session_id': session_id
+    })
 
 
 def reset_password_token(email: str) -> str:
