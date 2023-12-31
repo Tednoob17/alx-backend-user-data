@@ -35,14 +35,7 @@ class Base():
         else:
             self.updated_at = datetime.utcnow()
 
-    def __eq__(self, other: TypeVar('Base')) -> bool:
-        """ Equality
-        """
-        if type(self) != type(other):
-            return False
-        if not isinstance(self, Base):
-            return False
-        return (self.id == other.id)
+
 
     def to_json(self, for_serialization: bool = False) -> dict:
         """ Convert the object a JSON dictionary
