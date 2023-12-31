@@ -52,6 +52,14 @@ def reset_password_token(email: str) -> str:
     })
 
 
+def update_password(email: str, reset_token: str, new_password: str) -> None:
+    """update password"""
+    return requests.put('http://localhost:5000/reset_password', data={
+        'email': email,
+        'reset_token': reset_token,
+        'new_password': new_password
+    })
+
 
 EMAIL = "guillaume@holberton.io"
 PASSWD = "b4l0u"
