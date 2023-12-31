@@ -6,19 +6,18 @@ from .auth import Auth
 from models.user import User
 
 
+class BasicAuth(Auth):
+    """Basic Authentication"""
 
-    def decode_base64_authorization_header(self,
-                                           base64_authorization_header: str
-                                           ) -> str:
-        """Decode Base64"""
-        if base64_authorization_header is None or \
-           not isinstance(base64_authorization_header, str):
+    def extract_base64_authorization_header(self,
+                                            authorization_header: str) -> str:
+        """ Extract Base 64 from header """
+        if authorization_header is None or \
+           not isinstance(authorization_header, str) or \
+           not authorization_header.startswith("Basic "):
             return None
-        try:
-            base64_bytes = base64.b64decode(base64_authorization_header)
-            return base64_bytes.decode('utf-8')
-        except Exception:
-            return None
+        return authorization_header[6:]
+
 
     def extract_user_credentials(self,
                                  decode_base64_authorization_header: str
