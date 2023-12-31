@@ -24,7 +24,15 @@ class Auth:
     def __init__(self):
         self._db = DB()
 
- 
+    def register_user(self, email: str, password: str) -> User:
+        """Register a user"""
+        try:
+            self._db.find_user_by(email=email)
+        except NoResultFound:
+            new_user = self._db.add_user(email, _hash_password(password))
+            return new_user
+        raise ValueError('User {} already exists'.format(email))
+
     def valid_login(self, email: str, password: str) -> bool:
         """Checks if login is valid"""
         try:
