@@ -19,10 +19,7 @@ class User(Base):
         self.last_name = kwargs.get('last_name')
 
     @property
-    def password(self) -> str:
-        """ Getter of the password
-        """
-        return self._password
+
 
     @password.setter
     def password(self, pwd: str):
