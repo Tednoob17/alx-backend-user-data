@@ -7,16 +7,7 @@ from models.base import Base
 
 class User(Base):
     """ User class
-    """
-
-    def __init__(self, *args: list, **kwargs: dict):
-        """ Initialize a User instance
-        """
-        super().__init__(*args, **kwargs)
-        self.email = kwargs.get('email')
-        self._password = kwargs.get('_password')
-        self.first_name = kwargs.get('first_name')
-        self.last_name = kwargs.get('last_name')
+ 
 
     @property
     def password(self) -> str:
