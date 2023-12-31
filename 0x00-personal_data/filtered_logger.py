@@ -11,6 +11,10 @@ PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
 
 class RedactingFormatter(logging.Formatter):
+    """ Redacting Formatter class """
+
+    REDACTION = "***"
+  
 
     def __init__(self, fields: List[str] = None):
         """ Constructor method """
