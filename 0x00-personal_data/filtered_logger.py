@@ -73,7 +73,8 @@ def main():
             user_info += f'{p}={(f)}; '
         logger.info(user_info)
 
-
+    c.close()
+    db.close()
 
 
 if __name__ == "__main__":
