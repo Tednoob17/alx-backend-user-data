@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 """Filtering module for logging data"""
+import logging
+import re
+import os
+import mysql.connector
+from typing import List
 
 
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
 
 class RedactingFormatter(logging.Formatter):
-    """ Redacting Formatter class """
-
-    REDACTION = "***"
-    FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
-    SEPARATOR = ";"
 
     def __init__(self, fields: List[str] = None):
         """ Constructor method """
