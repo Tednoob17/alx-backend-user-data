@@ -30,10 +30,6 @@ def log_in(email: str, password: str) -> str:
     return response.cookies.get('session_id')
 
 
-def profile_unlogged() -> None:
-    """profile unlogged"""
-    return requests.get('http://localhost:5000/profile')
-
 
 def profile_logged(session_id: str) -> None:
     """profile logged"""
