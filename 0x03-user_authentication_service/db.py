@@ -48,7 +48,8 @@ class DB:
         """Update the user's attributes"""
         user_found = self.find_user_by(id=user_id)
         for key, value in kwargs.items():
-
+            if not hasattr(user_found, key):
+                raise ValueError
             setattr(user_found, key, value)
         self._session.commit()
         return None
