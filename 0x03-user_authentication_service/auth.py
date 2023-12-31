@@ -52,11 +52,12 @@ class Auth:
         self._db.update_user(user_found.id, session_id=session_id)
         return session_id
 
-        user_found = self._db.find_user_by(session_id=session_id)
-        except NoResultFound:
+    def get_user_from_session_id(self, session_id: str) -> Union[User, None]:
+        """Returns a user based on his session ID"""
+        if session_id is None:
             return None
-        return user_found
-
+        try:
+        
     def destroy_session(self, user_id: int) -> None:
         """Destroys a session"""
         if user_id is None:
