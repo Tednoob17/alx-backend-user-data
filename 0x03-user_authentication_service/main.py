@@ -45,12 +45,6 @@ def log_out(session_id: str) -> None:
     })
 
 
-def reset_password_token(email: str) -> str:
-    """reset password token"""
-    return requests.post('http://localhost:5000/reset_password', data={
-        'email': email
-    })
-
 
 def update_password(email: str, reset_token: str, new_password: str) -> None:
     """update password"""
