@@ -50,6 +50,5 @@ class DB:
         for key, value in kwargs.items():
             if not hasattr(user_found, key):
                 raise ValueError
-            setattr(user_found, key, value)
-        self._session.commit()
+
         return None
