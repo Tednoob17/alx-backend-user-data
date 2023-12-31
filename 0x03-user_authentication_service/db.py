@@ -20,9 +20,11 @@ class DB:
         Base.metadata.create_all(self._engine)
         self.__session = None
 
- 
-            self.__session = DBSession()
-        return self.__session
+    @property
+    def _session(self) -> Session:
+        """Memoized session object"""
+        if self.__session is None:
+            DBSession = sessionmaker(bind=self._engine)
 
     def add_user(self, email: str, hashed_password: str) -> User:
         """Save the user to the database"""
